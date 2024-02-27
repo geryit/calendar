@@ -24,7 +24,7 @@ const Days = ({ today, index }: { today: Dayjs; index: number }) => {
         {dayIndex}
       </h2>
       {match && (
-        <h3 className="text-[10px] leading-[1.2] font-libre uppercase">
+        <h3 className={`text-[10px] leading-[1.2] font-libre uppercase ${isToday ? "text-white" : ""}`}>
           {match?.title}
         </h3>
       )}
