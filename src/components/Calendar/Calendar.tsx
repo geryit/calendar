@@ -1,11 +1,14 @@
+"use client";
+
 import dayjs, { firstDayOfWeek } from "@/lib/dayjs";
 import React, { useMemo } from "react";
 import Cell from "@/components/Calendar/Cell";
-import Days from "@/components/Calendar/Days";
+import Day from "@/components/Calendar/Day";
+import getFlattenedData from "@/utils/getFlattenedData";
 
 const daysInAWeek = 7;
 
-const Calendar = ({ now }: { now?: Date }) => {
+const Calendar = ({ now, sort }: { now?: Date; sort?: boolean }) => {
   const today = useMemo(() => dayjs(now), [now]);
 
   // Get the days in the month (eg: 30)
@@ -38,8 +41,11 @@ const Calendar = ({ now }: { now?: Date }) => {
     [today],
   );
 
+  const flattenedData = getFlattenedData(today, sort);
+  console.log(flattenedData);
+
   return (
-    <div className="border-4 border-green-450 max-w-6xl">
+    <div className="border-4 border-green-450 max-w-6xl mb-8">
       <h1 className="font-fjalla p-4 text-5xl leading-[1.3] text-center text-black-80">
         Weekly Program ({today.format("MMM")})
       </h1>
@@ -53,7 +59,7 @@ const Calendar = ({ now }: { now?: Date }) => {
           <Cell key={i} />
         ))}
         {daysInMonth.map((_, i) => (
-          <Days key={i} today={today} index={i} />
+          <Day key={i} today={today} index={i} flattenedData={flattenedData} />
         ))}
         {suffixDays.map((_, i) => (
           <Cell key={i} />
