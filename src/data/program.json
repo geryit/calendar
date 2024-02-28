@@ -23,7 +23,7 @@
   }, {
     "weekday": "FRIDAY",
     "title": "Consequences of Autopilot",
-    "completed": true
+    "completed": false
   }],
   "week3": [{
     "weekday": "MONDAY",

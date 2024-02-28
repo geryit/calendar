@@ -5,6 +5,7 @@ type PropsWithOptionalChildren<P = unknown> = P & {
   isToday?: boolean;
 };
 
+// Calendar blocks
 const Cell = ({ children, isToday }: PropsWithOptionalChildren) => {
   return (
     <li

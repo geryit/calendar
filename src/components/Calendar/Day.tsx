@@ -1,45 +1,42 @@
 import type { FlattenedDay } from "@/utils/getFlattenedData";
 import Cell from "@/components/Calendar/Cell";
-import React, { memo, useMemo } from "react";
+import React, { memo } from "react";
 import type { Dayjs } from "dayjs";
 
-const Day = ({
-  today,
-  index,
-  flattenedData,
-}: {
-  today: Dayjs;
-  index: number;
+type Props = {
+  currentDate: Dayjs;
+  dayIndex: number;
   flattenedData: FlattenedDay[];
-}) => {
-  const dayIndex = useMemo(() => index + 1, [index]);
-  const activityFound = useMemo(
-    () => flattenedData.find((date) => date.day === dayIndex),
-    [flattenedData, dayIndex],
-  );
-  const isCompleted = useMemo(
-    () => activityFound?.completed,
-    [activityFound?.completed],
-  );
+};
 
-  const isToday = useMemo(
-    () => today.get("date") === dayIndex,
-    [dayIndex, today],
-  );
+// Build the actual days of the month
+const Day = ({
+  currentDate, // Current dayjs instance
+  dayIndex, // Day of Month (eg: 14)
+  flattenedData, // data to assign activities to days
+}: Props) => {
+  // Activity matched for the day
+  const activityMatched = flattenedData.find((date) => date.day === dayIndex);
+
+  // Check if the activity is completed, so we can make the number green
+  const isCompleted = activityMatched?.completed;
+
+  // Check if the day is today, so we can highlight it
+  const isToday = currentDate.get("date") === dayIndex;
 
   return (
     <Cell isToday={isToday}>
       <h2
-        className={`font-libre font-bold text-[4rem]  
-                ${isToday ? "text-white" : isCompleted ? "text-green-450" : "text-black-80"}`}
+        className={`font-libre font-bold text-[4rem] 
+        ${isToday ? "text-white" : isCompleted ? "text-green-450" : "text-black-80"}`}
       >
         {dayIndex}
       </h2>
-      {activityFound && (
+      {activityMatched && (
         <h3
           className={`text-[10px] leading-[1.2] font-libre uppercase ${isToday ? "text-white" : ""}`}
         >
-          {activityFound.title}
+          {activityMatched.title}
         </h3>
       )}
     </Cell>
