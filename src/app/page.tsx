@@ -8,9 +8,9 @@ export default function Home() {
       {/*--------------------------------*/}
       {/*<Calendar currentDateRaw={new Date(2024, 0, 13)} sort={false} />*/}
       {/*<Calendar currentDateRaw={new Date(2024, 0, 13)} />*/}
-      {/*--------------------------------*/}
-      {/*<Calendar currentDateRaw={new Date(2024, 0, 14)} sort={false} />*/}
-      {/*<Calendar currentDateRaw={new Date(2024, 0, 14)} />*/}
+      --------------------------------
+      <Calendar currentDateRaw={new Date(2024, 0, 14)} sort={false} />
+      <Calendar currentDateRaw={new Date(2024, 0, 14)} />
       {/*--------------------------------*/}
       {/*<Calendar currentDateRaw={new Date(2024, 0, 15)} sort={false} />*/}
       {/*<Calendar currentDateRaw={new Date(2024, 0, 15)} />*/}
@@ -30,9 +30,16 @@ export default function Home() {
       {/*<Calendar currentDateRaw={new Date(2024, 0, 31)} sort={false} />*/}
       {/*<Calendar currentDateRaw={new Date(2024, 0, 31)} />*/}
       --------------------------------
-      {/*<Calendar currentDateRaw={new Date(2024, 1, 15)} />*/}
       {Array.from({ length: 12 }).map((_, i) => (
-        <Calendar key={i} currentDateRaw={new Date(2024, i, 14)} />
+        <>
+          <Calendar
+            key={`${i}-unsorted`}
+            currentDateRaw={new Date(2024, i, 14)}
+            sort={false}
+          />
+          <Calendar key={i} currentDateRaw={new Date(2024, i, 14)} />
+          ------------------------------------
+        </>
       ))}
     </main>
   );

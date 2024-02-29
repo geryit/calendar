@@ -14,7 +14,7 @@ export type FlattenedDay = {
   But since we care, we need to check if month starts on a Monday and subtract 1 from the weekIndexInMonth
   to move the block to the previous week.
   Without this adjustment, if the month starts on a Monday,
-  program will start on the second week of the month (8th instead of 1st).
+  the program will start on the second week of the month (8th instead of 1st).
 */
 const getAdjustedWeekIndexInMonth = (
   weekIndexInMonth: number,
@@ -32,10 +32,10 @@ const getDayIndexInMonth = (
   dayIndexInWeek: number,
 ) => {
   return currentDate // eg: 14-03-2024
-    .set("date", 1) // Set to the first day of month. For March: 01-03-2024
-    .add(getAdjustedWeekIndexInMonth(weekIndexInMonth, currentDate), "week") // Add weekIndex * 7 days to date. eg: For week 1: 08-03-2024
-    .weekday(dayIndexInWeek) // For Tuesday, add 1 day. eg: 09-03-2024
-    .get("date"); // Get the day of the month. eg: 9
+    .set("date", 1) // Set to the first day of the month. For March: 01-03-2024
+    .add(getAdjustedWeekIndexInMonth(weekIndexInMonth, currentDate), "week") // Add weekIndex * 7 days to date. Eg: For week 1: 08-03-2024
+    .weekday(dayIndexInWeek) // For Tuesday, add 1 day. E.g.: 09-03-2024
+    .get("date"); // Get the day of the month. E.g.: 9
 };
 
 // Build the flatted activity data, so we can use it in the calendar to add activities to days
@@ -48,21 +48,21 @@ const getFlattenedData = (currentDate: Dayjs, sort = true): FlattenedDay[] => {
 
       // rebuild the data with the day number, so we can match in the UI
       return week.map((date) => {
-        // find the index of the day in the week. For Monday: 0
+        // Find the index of the day in the week. For Monday: 0
         const dayIndexInWeek = weekDays.findIndex(
           (day) => day.toLowerCase() === date.weekday.toLowerCase(),
         );
 
-        // Find the day of the month. Eg: 14
+        // Find the day of the month. E.g.: 14
         const dayIndexInMonth = getDayIndexInMonth(
           currentDate, // Current day's dayjs instance
-          weekIndexInMonth, // Week index in month . for week1: 1
+          weekIndexInMonth, // Week index in month. For week1: 1
           dayIndexInWeek, // For Monday: 0
         );
 
         return {
           ...date,
-          day: dayIndexInMonth,
+          day: dayIndexInMonth, // add the day of the month
         };
       });
     })
@@ -73,26 +73,43 @@ const getFlattenedData = (currentDate: Dayjs, sort = true): FlattenedDay[] => {
   return res;
 };
 
+/**
+  Add activies to the flatted days organize by activity "completed" status
+  Scan the days in the past and move them to present starting from the current day
+
+  Assuming today is 14th:
+  Input: [{day: 10, completed: false, title: "title1"},{day: 12, completed: false, title: "title2"}]
+  Output:[{day: 14, completed: false, title: "title1"},{day: 15, completed: false, title: "title2"}]
+*/
 const applyActivitySorting = (
   days: FlattenedDay[],
   currentDayIndex: number,
 ) => {
-  const modifiedDays: number[] = [];
+  // Days in the present to be replaced with the days in the past. E.g.: [14, 15]
+  const modifiedDaysInPresent: number[] = [];
 
   return days.map((d) => {
-    const newDayIndex = currentDayIndex + modifiedDays.length;
+    // Calculate the new day index. E.g.: 14, 15, 16
+    const newDayIndex = currentDayIndex + modifiedDaysInPresent.length;
 
+    /**
+     * If the activity is not completed and the day is in the past. E.g.: 10, 12
+     * Update the "day" with the new day index. E.g.: 14, 15
+     */
     if (!d.completed && d.day <= currentDayIndex) {
-      modifiedDays.push(newDayIndex);
-
+      modifiedDaysInPresent.push(newDayIndex);
       return { ...d, day: newDayIndex };
     }
 
-    if (modifiedDays.includes(d.day)) {
+    /**
+     * If above modify the day in the present with activity, update the "day" with the new day index.
+     * E.g.: 15th had activity, so it should be moved to 16th
+     */
+    if (modifiedDaysInPresent.includes(d.day)) {
       return {
         ...d,
         day: newDayIndex,
-        title: d.completed ? "" : d.title,
+        title: d.completed ? "" : d.title, //
         completed: false,
       };
     }
