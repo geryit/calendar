@@ -1,26 +1,57 @@
 {
   "compilerOptions": {
+    // Includes type definitions for the DOM, iterable DOM elements, and ECMAScript features.
     "lib": ["dom", "dom.iterable", "esnext"],
+
+    // Allows JavaScript files to be imported into your TypeScript project.
     "allowJs": true,
+
+    // Skips type checking of all declaration files (*.d.ts).
     "skipLibCheck": true,
+
+    // Enables all strict type-checking options.
     "strict": true,
+
+    // Instructs the compiler not to emit any compiled output (like JavaScript files).
     "noEmit": true,
+
+    // Enables compatibility with Babel-style ES module interop.
     "esModuleInterop": true,
+
+    // Sets the module system for the project to ESNext.
     "module": "esnext",
+
+    // Specifies how module imports are resolved. "bundler" is typically used with bundlers like webpack.
     "moduleResolution": "bundler",
+
+    // Allows importing JSON modules.
     "resolveJsonModule": true,
+
+    // Ensures each file can be safely transpiled without relying on other files.
     "isolatedModules": true,
+
+    // Preserves JSX to be transformed into JavaScript by another step (like Babel).
     "jsx": "preserve",
+
+    // Enables incremental compilation by saving information about the project graph from the last compilation.
     "incremental": true,
+
+    // Includes TypeScript plugins, in this case, a plugin for Next.js.
     "plugins": [
       {
         "name": "next"
       }
     ],
+
+    // Sets up a custom path alias. "@" can be used to import modules from the "src" directory.
     "paths": {
       "@/*": ["./src/*"]
     }
   },
+
+  // Specifies which files are to be included in the compilation.
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+
+  // Excludes the node_modules folder from the compilation.
   "exclude": ["node_modules"]
 }

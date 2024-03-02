@@ -1,16 +1,18 @@
 import dayjs from "dayjs";
 import localeData from "dayjs/plugin/localeData";
 import weekday from "dayjs/plugin/weekday";
-import weekOfYear from "dayjs/plugin/weekOfYear"; // May need to use a different plugin if looking to set week
 import "dayjs/locale/en-gb"; // Import more locales here if needed
 
 // add more plugins here if needed
-dayjs.extend(localeData);
-dayjs.extend(weekOfYear);
-dayjs.extend(weekday);
-dayjs.locale("en-gb"); // Monday is the first day of the week. Default is Sunday
+dayjs.extend(localeData); // so that we can use dayjs().weekdays()
+dayjs.extend(weekday); // so that we can use dayjs().weekday()
 
-// if weekStartDayIndex === Monday ? 1 : 0
+// Changing locale globally
+// Monday is the first day of the week for GB.
+// Default is Sunday
+dayjs.locale("en-gb");
+
+// if weekStartDayIndex === Monday? 1 : 0
 // Use this to add empty prefix and suffix blocks in calendar for UI
 export const weekStartDayIndex = dayjs.localeData().firstDayOfWeek();
 

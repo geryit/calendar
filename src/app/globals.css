@@ -1,3 +1,36 @@
+/**
+ * Global CSS Styles
+ *
+ * This file is a global stylesheet for the application. It integrates Tailwind CSS by
+ * importing its layers: base, components, and utilities.
+ *
+ * Tailwind CSS Layers:
+ * 1. @tailwind base: Imports Tailwind's base styles. These are low-level, pre-designed
+ *    styles like normalize.css or reset.css that provide a consistent styling baseline
+ *    across browsers. They include default styles for standard HTML elements.
+ *
+ * 2. @tailwind components: Imports the component classes defined in your Tailwind
+ *    configuration. This layer is where you define your own custom components or extend
+ *    Tailwind's default components.
+ *
+ * 3. @tailwind utilities: Imports Tailwind's utility classes. These are a comprehensive
+ *    set of CSS classes for styling elements directly in your markup. They cover a wide
+ *    range of CSS properties and provide a high degree of design flexibility.
+ *
+ * Usage:
+ * Include this file in the main entry point of your application to make Tailwind CSS
+ * styles available across your entire app.
+ *
+ * Example:
+ * In a React application, you might import this file in your `index.js` or `App.js` file:
+ * `import './app/globals.css';`
+ *
+ * Note:
+ * - Ensure that Tailwind CSS is properly configured in your project, including its installation
+ *   and configuration in your `tailwind.config.js` and `postcss.config.js` files.
+ * - This file should be the first CSS file imported in your project to lay down the foundation
+ *   of global styles on which you can build component-specific styles.
+ */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

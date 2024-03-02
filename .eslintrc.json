@@ -1,3 +1,14 @@
 {
-  "extends": "next/core-web-vitals"
+  // "extends" is a key in ESLint configuration that allows you to extend from existing configurations.
+  "extends": [
+    // "next/core-web-vitals" is an ESLint configuration provided by Next.js.
+    // It's tailored for Next.js applications and includes rules to enforce
+    // best practices for web vitals (performance, accessibility, etc.).
+    "next/core-web-vitals",
+
+    // "plugin:storybook/recommended" is an ESLint configuration for Storybook.
+    // Storybook is a tool for building UI components and pages in isolation.
+    // This configuration includes recommended ESLint rules for Storybook usage.
+    "plugin:storybook/recommended"
+  ]
 }
