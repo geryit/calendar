@@ -14,7 +14,7 @@ type PropsWithOptionalChildren<P = unknown> = P & {
  */
 
 const Cell = ({ children, isToday }: PropsWithOptionalChildren) => {
-  const cellClass = `text-center border-b-2 border-r-2 border-green-450 p-2 ${isToday ? "bg-green-450" : ""}`;
+  const cellClass = `border-b-2 border-r-2 border-green-450 p-2 min-h-28 ${isToday ? "bg-green-450 completed-cell" : ""}`;
   return <li className={cellClass}>{children}</li>;
 };
 

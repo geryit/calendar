@@ -1,4 +1,4 @@
-"use client";
+"use client"; // This is a client-side component (has hooks, etc.)
 
 import dayjs, {
   weekDaysCount,
@@ -71,15 +71,15 @@ const Calendar = ({
   );
 
   return (
-    <div className="border-4 border-green-450 max-w-6xl mb-8">
+    <div className="border-4 border-green-450 max-w-[60rem] mb-8">
       {/* Added Month name to heading. Can help to identify the month. */}
-      <h1 className="font-fjalla font-bold p-4 text-5xl leading-[1.3] text-center text-black-80">
+      <h1 className="font-fjalla font-bold p-2 text-5xl leading-[1.3] text-center text-black-80">
         Weekly Program ({currentDate.format("MMM")})
       </h1>
       <ul className="grid grid-cols-7 border-t-2 border-green-450 text-center -mr-[2px] -mb-[2px]">
         {/* Render the headers for each day of the week */}
         {weekDaysShort.map((day, i) => (
-          <li key={i} className="border-b-2 border-r-2 border-green-450 p-4">
+          <li key={i} className="border-b-2 border-r-2 border-green-450 p-2">
             <h3 className="font-sans text-black-80 uppercase">{day}</h3>
           </li>
         ))}

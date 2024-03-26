@@ -1,6 +1,6 @@
-# Frontend task
+# Frontend Assignment
 
-Your task is to make an app that displays 3-week treatment program. Treatment program used as input is described in JSON file and the desired output is presented in a design.
+Your assignment is to make an app that displays 3-week treatment program. Treatment program used as input is described in JSON file and the desired output is presented in a design.
 
 ## Input Format
 
@@ -45,11 +45,11 @@ Your app should match the design in the picture above using the following specs:
 
 ## Tech
 
-Project must use React. Otherwise feel free to use any tools and 3rd party libraries you like.
+Assignment must use React. Otherwise feel free to use any tools and 3rd party libraries you like.
 
 ## Delivering
 
-Make a pull request of your task and leave it open when you are done :slightly_smiling_face:
+Make a pull request of your assignment and leave it open when you are done :slightly_smiling_face:
 
 You should at least update the `README.md` with installation and running instructions. Also consider how you demonstrate that your app is working as intended.
 
@@ -58,7 +58,7 @@ You should at least update the `README.md` with installation and running instruc
 
 # Next.js Calendar Application
 
-Welcome to Meru, a modern web application built with Next.js, featuring a fully interactive calendar interface, comprehensive component documentation via Storybook, and a robust testing framework through Jest.
+Welcome to Calendar, a modern web application built with Next.js, featuring a fully interactive calendar interface, comprehensive component documentation via Storybook, and a robust testing framework through Jest.
 
 ## Features
 

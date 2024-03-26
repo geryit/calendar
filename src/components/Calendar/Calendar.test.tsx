@@ -1,10 +1,8 @@
-// Importing necessary dependencies for testing.
 import React from "react";
 import { render, screen, within } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Calendar from "@/components/Calendar/Calendar";
 
-// Describe block for grouping related tests for the Calendar component.
 describe("Calendar Component", () => {
   // Test case for ensuring correct rendering with a given weekly program and current date.
   it("renders correctly with given weekly program and current date", () => {
@@ -37,21 +35,21 @@ describe("Calendar Component", () => {
       .closest("li");
 
     // Checking if the current day element has the expected background color.
-    expect(currentDayElement).toHaveClass("bg-green-450");
+    expect(currentDayElement).toHaveClass("completed-cell");
 
     // Additional checks within the current day element.
     if (currentDayElement) {
       // Ensuring the text color of the current day number is white.
       expect(
         within(currentDayElement).getByRole("heading", { level: 2 }),
-      ).toHaveClass("text-white");
+      ).toHaveClass("current");
 
       // Verifying the presence of a specific activity on the current day.
       within(currentDayElement).getByText("activity4");
     }
 
     // Checking the number of completed activities based on text color.
-    expect(container.getElementsByClassName("text-green-450").length).toBe(3);
+    expect(container.getElementsByClassName("completed").length).toBe(3);
 
     // Ensuring the correct number of days in March.
     expect(container.getElementsByTagName("h2").length).toBe(31);

@@ -34,8 +34,12 @@ const Day = ({
   // Check if the day is today, so we can highlight it
   const isToday = currentDate.date() === dayIndex;
 
-  const dayClassName = `font-libre font-bold text-[4rem] ${
-    isToday ? "text-white" : isCompleted ? "text-green-450" : "text-black-80"
+  const dayClassName = `font-libre font-bold text-[4rem] leading-tight ${
+    isToday
+      ? "text-white current"
+      : isCompleted
+        ? "text-green-450 completed"
+        : "text-black-80"
   }`;
 
   const activityTitleClassName = `text-[10px] leading-[1.2] font-libre uppercase ${
